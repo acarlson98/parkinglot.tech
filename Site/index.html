@@ -1,78 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <title>ParkingLot.Tech</title>
+<link rel="icon" 
+      type="image/png" 
+      href="parkinglot_art.jpg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-.w3-sidebar {
-  z-index: 3;
-  width: 250px;
-  top: 43px;
-  bottom: 0;
-  height: inherit;
-}
-table, th, td {
-  border: 5px solid black;
-}
-</style>
+<link rel="stylesheet" href="main.css">
 
-<!-- <script src="parser.js"></script> -->
-<body onload="currentConditions();forecast();">
+<body onload="currentConditions();forecast();updateSpots()">
 
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" width="60px"></a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" height="50px"></a>
+    <a href="large_example.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
   </div>
 </div>
 
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main">
+<div class="w3-main" style="margin-left: 30px; margin-right: 30px">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Parking Space Checker</h1>
-      <p>Below you can check parking space availability. Green means the space is currently vacant, while red means the space is currently in use.</p>
+      <h1 style="color:#1B1464">Parking Space Checker</h1>
+      <p style="color:#1B1464">Below you can check parking space availability. Green means the space is currently vacant, while red means the space is currently in use.</p>
 
-      <p>The parking lot is currently __ % full.</p>
+      <p style="color:#1B1464" id="spots_left">There are __ spots left.</p>
 
         <!-- Parking Spot Regions -->
-        <table style="width:100%">
+        <table class="parking_graph">
           <tr>
-            <!-- use bgcolor="#FF0000" for red -->
-            <!-- #00ff00 for green -->
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 1</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 2</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 3</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 4</td>
-            <!-- <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 5</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 6</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 7</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 8</td> -->
+            <!-- use bgcolor="#EA2027" for red -->
+            <!-- #009432 for green -->
+            <td id="one" bgcolor="#EA2027" align="center">Spot 1</td>
+            <td id="two" bgcolor="#009432" align="center">Spot 2</td>
+            <td id="three" bgcolor="#EA2027" align="center">Spot 3</td>
           </tr>
-          <!-- <tr>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 9</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 10</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 11</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 12</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 13</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 14</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 15</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 16</td>
-          </tr> -->
         </table>
+        <button onclick="">1</button>
+        <button onclick="">2</button>
+        <button onclick="">3</button>
+
+        <p id="spotOne">stuff</p>
+        <p id="spotTwo">stuff</p>
+        <p id="spotThree">stuff</p>
     </div>
     <div class="w3-third w3-container">
-      <h2 class="w3-text-teal">Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
-      <img src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="current">current</p>
+      <h2>Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
+      <div class="w3-border w3-padding-large w3-padding-32"> 
+        <img class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
+        <p class="w3-center" id="current">current</p>
+        <p class="w3-center" id="current_time">current_time</p>
+      </div>
+      
       <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="forecast">forecast</p>
       <button onclick="currentConditions();forecast();image();">Update</button>
     </div>
@@ -81,6 +65,7 @@ table, th, td {
 <!-- END MAIN -->
 
 <script>
+  var full = 2;
 function currentConditions(){
 
   var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
@@ -94,6 +79,7 @@ function currentConditions(){
       document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
       + myJson[0].Temperature.Imperial.Value + " " 
       + myJson[0].Temperature.Imperial.Unit;
+      document.getElementById("current_time").innerHTML = myJson[0].LocalObservationDateTime;
 
       var icon = myJson[0].WeatherIcon;
       if(icon < 10){
@@ -124,7 +110,46 @@ fetch(URL)
 });
 }
 
+function updateSpots(){
+  //feeds
+  var feedURL="https://api.thingspeak.com/channels/985815/feeds.json?results=2";
+  //fields
+  var fieldURL="https://api.thingspeak.com/channels/985815/fields/1.json?results=2";
+  //status
+  var statusURL="https://api.thingspeak.com/channels/985815/status.json";
 
+  fetch(feedURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("feed");  
+    console.log(myJson);
+
+    document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
+    document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
+    document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
+  });
+}
+
+// function updatePercent(){
+// // number full / total (3) * 100
+//   document.getElementById("percentage").innerHTML = "The parking lot is currently " + ((full/3)*100) + " % full.";
+// }
+
+// function toggleOne(){
+//   if(getElementById(one)){
+
+//   }
+// }
+
+// function toggleTwo(){
+
+// }
+
+// function toggleThree(){
+
+// }
 </script>
 </div>
 
