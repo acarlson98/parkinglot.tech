@@ -22,8 +22,11 @@
 #include <NewPing.h>
 
 #define RESULT1      15
+#define ESP1         10
 #define RESULT2      9
+#define ESP2         16
 #define RESULT3      8
+#define ESP3         14
 #define TRIGGER_1    2
 #define ECHO_1       3
 #define TRIGGER_2    4
@@ -31,8 +34,8 @@
 #define TRIGGER_3    6
 #define ECHO_3       7
 #define MAX_DISTANCE 400
-#define TIMECHECK    50000UL //30000UL
-#define TIMELIMIT    60000UL //60000UL
+#define TIMECHECK    5UL     //30000UL
+#define TIMELIMIT    5000UL //60000UL
 
 float duration, distance;
 int iterations = 10;
@@ -46,10 +49,17 @@ void setup() {
     pinMode(RESULT1, OUTPUT);
     pinMode(RESULT2, OUTPUT);
     pinMode(RESULT3, OUTPUT);
+    pinMode(ESP1, OUTPUT);
+    pinMode(ESP2, OUTPUT);
+    pinMode(ESP3, OUTPUT);
     
     digitalWrite(RESULT1, LOW);
     digitalWrite(RESULT2, LOW);
     digitalWrite(RESULT3, LOW);
+    digitalWrite(ESP1, LOW);
+    digitalWrite(ESP2, LOW);
+    digitalWrite(ESP3, LOW);
+    
     thisState1 = LOW;
     thisState2 = LOW;
     thisState3 = LOW;
@@ -94,11 +104,13 @@ void loop() {
       else
       {
         digitalWrite(RESULT1, LOW);
+        digitalWrite(ESP1, LOW);
       }
       
       if ((lastState1 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-      digitalWrite(RESULT1, HIGH);
+        digitalWrite(RESULT1, HIGH);
+        digitalWrite(ESP1, HIGH);
       }
     }
     
@@ -137,11 +149,13 @@ void loop() {
       else
       {
         digitalWrite(RESULT2, LOW);
+        digitalWrite(ESP2, LOW);
       }
       
       if ((lastState2 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-      digitalWrite(RESULT2, HIGH);
+        digitalWrite(RESULT2, HIGH);
+        digitalWrite(ESP2, HIGH);
       }
     }
     
@@ -180,11 +194,13 @@ void loop() {
       else
       {
         digitalWrite(RESULT3, LOW);
+        digitalWrite(ESP3, LOW);
       }
       
       if ((lastState3 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-      digitalWrite(RESULT3, HIGH);
+        digitalWrite(RESULT3, HIGH);
+        digitalWrite(ESP3, HIGH);
       }
     }
     
