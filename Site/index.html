@@ -21,7 +21,7 @@ table, th, td {
 }
 </style>
 
-<script src="parser.js"></script>
+<!-- <script src="parser.js"></script> -->
 <body onload="currentConditions();">
 
 <!-- Navbar -->
@@ -79,6 +79,22 @@ table, th, td {
   </div>
 
 <!-- END MAIN -->
+
+<script>
+  function currentConditions(){
+
+  var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
+
+  fetch(URL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+      console.log(myJson);
+      document.getElementById("demo").innerHTML = myJson[0].WeatherText + ", " + myJson[0].Temperature.Imperial.Value + " " + myJson[0].Temperature.Imperial.Unit;
+  });
+}
+</script>
 </div>
 
 </body>
