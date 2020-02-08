@@ -17,19 +17,19 @@
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" width="60px"></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" height="50px"></a>
     <a href="large_example.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
   </div>
 </div>
 
-<div class="w3-main">
+<div class="w3-main" style="margin-left: 30px; margin-right: 30px">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1>Parking Space Checker</h1>
-      <p>Below you can check parking space availability. Green means the space is currently vacant, while red means the space is currently in use.</p>
+      <h1 style="color:#1B1464">Parking Space Checker</h1>
+      <p style="color:#1B1464">Below you can check parking space availability. Green means the space is currently vacant, while red means the space is currently in use.</p>
 
-      <p id="percentage">The parking lot is currently __ % full.</p>
+      <p style="color:#1B1464" id="spots_left">There are __ spots left.</p>
 
         <!-- Parking Spot Regions -->
         <table class="parking_graph">
@@ -44,6 +44,10 @@
         <button onclick="">1</button>
         <button onclick="">2</button>
         <button onclick="">3</button>
+        
+        <p id="spotOne">stuff</p>
+        <p id="spotTwo">stuff</p>
+        <p id="spotThree">stuff</p>
     </div>
     <div class="w3-third w3-container">
       <h2>Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
@@ -119,26 +123,11 @@ function updateSpots(){
   .then((myJson) => {
     console.log("feed");  
     console.log(myJson);
-  });
 
-  fetch(fieldURL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-    console.log("field"); 
-    console.log(myJson);
+    document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
+    document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
+    document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
   });
-
-  fetch(statusURL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-    console.log("status"); 
-    console.log(myJson);
-  });
-
 }
 
 // function updatePercent(){
