@@ -80,9 +80,9 @@ void messageHandler(String &topic, String &payload) {
 void setup() {
   Serial.begin(9600);
   connectAWS();
-  pinMode(5, input);
-  pinMode(18, input);
-  pinMode(23, input);
+  pinMode(5, INPUT);
+  pinMode(18, INPUT);
+  pinMode(23, INPUT);
 }
 
 void loop() {
