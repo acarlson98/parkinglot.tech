@@ -21,18 +21,18 @@
 // NewPing - Version: Latest 
 #include <NewPing.h>
 
-#define RESULT1      5
-#define RESULT2      6
-#define RESULT3      7
-#define TRIGGER_1    8
-#define ECHO_1       9
-#define TRIGGER_2    10
-#define ECHO_2       11
-#define TRIGGER_3    12
-#define ECHO_3       13
+#define RESULT1      15
+#define RESULT2      9
+#define RESULT3      8
+#define TRIGGER_1    2
+#define ECHO_1       3
+#define TRIGGER_2    4
+#define ECHO_2       5
+#define TRIGGER_3    6
+#define ECHO_3       7
 #define MAX_DISTANCE 400
-#define TIMECHECK    5UL     //50000UL
-#define TIMELIMIT    5000UL //60000UL
+#define TIMECHECK    50000UL //30000UL
+#define TIMELIMIT    60000UL //60000UL
 
 float duration, distance;
 int iterations = 10;
@@ -146,5 +146,47 @@ void loop() {
     }
     
     bigMillis = millis();
+
+    ////////////////test sensor 3/////////////////
+    while(millis() - bigMillis <= TIMELIMIT)
+    {
+      NewPing sonar(TRIGGER_3, ECHO_3, MAX_DISTANCE);
+      
+      duration = sonar.ping_median(iterations);
     
+      //Determine distance from duration
+      // Speed of sound = 343 m/s
+      
+      distance = (duration / 2) * 0.0343;
+      
+      //Send results to Serial Monitor
+      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
+      if (distance <= 75)
+      {
+        thisState3 = HIGH;
+      }
+      else
+      {
+        thisState3 = LOW;
+      }
+      
+      if (lastState3 != thisState3)
+      {
+      //update to the new state
+      lastState3 = thisState3;
+      //record time
+      startMillis = millis();
+      }
+      else
+      {
+        digitalWrite(RESULT3, LOW);
+      }
+      
+      if ((lastState3 == HIGH) && (millis() - startMillis >= TIMECHECK))
+      {
+      digitalWrite(RESULT3, HIGH);
+      }
+    }
+    
+    bigMillis = millis();
 }
