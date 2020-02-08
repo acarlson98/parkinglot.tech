@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="main.css">
 
-<body onload="currentConditions();forecast();">
+<body onload="currentConditions();forecast();updateSpots()">
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -36,9 +36,9 @@
           <tr>
             <!-- use bgcolor="#EA2027" for red -->
             <!-- #009432 for green -->
-            <td bgcolor="#EA2027" align="center">Spot 1</td>
-            <td bgcolor="#009432" align="center">Spot 2</td>
-            <td bgcolor="#EA2027" align="center">Spot 3</td>
+            <td id="one" bgcolor="#EA2027" align="center">Spot 1</td>
+            <td id="two" bgcolor="#009432" align="center">Spot 2</td>
+            <td id="three" bgcolor="#EA2027" align="center">Spot 3</td>
           </tr>
         </table>
         <button onclick="">1</button>
@@ -60,6 +60,7 @@
 <!-- END MAIN -->
 
 <script>
+  var full = 2;
 function currentConditions(){
 
   var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
@@ -103,9 +104,61 @@ fetch(URL)
 });
 }
 
-function updatePercent(){
+function updateSpots(){
+  //feeds
+  var feedURL="https://api.thingspeak.com/channels/985815/feeds.json?results=2";
+  //fields
+  var fieldURL="https://api.thingspeak.com/channels/985815/fields/1.json?results=2";
+  //status
+  var statusURL="https://api.thingspeak.com/channels/985815/status.json";
+
+  fetch(feedURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("feed");  
+    console.log(myJson);
+  });
+
+  fetch(fieldURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("field"); 
+    console.log(myJson);
+  });
+
+  fetch(statusURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("status"); 
+    console.log(myJson);
+  });
 
 }
+
+// function updatePercent(){
+// // number full / total (3) * 100
+//   document.getElementById("percentage").innerHTML = "The parking lot is currently " + ((full/3)*100) + " % full.";
+// }
+
+// function toggleOne(){
+//   if(getElementById(one)){
+
+//   }
+// }
+
+// function toggleTwo(){
+
+// }
+
+// function toggleThree(){
+
+// }
 </script>
 </div>
 
