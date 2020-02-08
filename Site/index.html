@@ -22,20 +22,19 @@ table, th, td {
 </style>
 
 <!-- <script src="parser.js"></script> -->
-<body onload="currentConditions();">
+<body onload="currentConditions();forecast();">
 
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+    <a href="#" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" width="60px"></a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
   </div>
 </div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
@@ -71,17 +70,18 @@ table, th, td {
         </table>
     </div>
     <div class="w3-third w3-container">
-      <h2 class="w3-text-teal">Current weather in Kansas provided by AccuWeather</h2>
-      <!-- <p class="w3-border w3-padding-large w3-padding-32 w3-center"><a href="http://dataservice.accuweather.com/locations/v1/search?q=State%20College&apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV">Link</a></p> -->
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="demo">Something</p>
-      <button onclick="currentConditions()">Update</button>
+      <h2 class="w3-text-teal">Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
+      <img src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="current">current</p>
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="forecast">forecast</p>
+      <button onclick="currentConditions();forecast();image();">Update</button>
     </div>
   </div>
 
 <!-- END MAIN -->
 
 <script>
-  function currentConditions(){
+function currentConditions(){
 
   var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
 
@@ -91,9 +91,40 @@ table, th, td {
   })
   .then((myJson) => {
       console.log(myJson);
-      document.getElementById("demo").innerHTML = myJson[0].WeatherText + ", " + myJson[0].Temperature.Imperial.Value + " " + myJson[0].Temperature.Imperial.Unit;
+      document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
+      + myJson[0].Temperature.Imperial.Value + " " 
+      + myJson[0].Temperature.Imperial.Unit;
+
+      var icon = myJson[0].WeatherIcon;
+      if(icon < 10){
+        var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
+      } else{
+        var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
+      }
+      document.getElementById("currentImage").src = newUrl;
   });
 }
+
+function forecast(){
+
+var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
+var temps = "";
+
+fetch(URL)
+.then((response) => {
+    return response.json();
+})
+.then((myJson) => {
+    console.log(myJson);
+    var i;
+    for(i = 0; i < myJson.length; i++){
+       temps += myJson[i].Temperature.Value + " ";
+    }
+    document.getElementById("forecast").innerHTML = temps;
+});
+}
+
+
 </script>
 </div>
 
