@@ -9,8 +9,7 @@ function currentConditions(){
     .then((myJson) => {
         console.log(myJson);
         // var myObj = JSON.parse(myJson);
-        document.getElementById("demo").innerHTML = myJson[0].WeatherText;
-        document.getElementById("demo2").innerHTML = myJson[0].Temperature.Imperial.Value + myJson[0].Temperature.Imperial.Unit;
+        document.getElementById("demo").innerHTML = myJson[0].WeatherText + ", " + myJson[0].Temperature.Imperial.Value + " " + myJson[0].Temperature.Imperial.Unit;
     });
 
 //   var myObj = JSON.parse(json);

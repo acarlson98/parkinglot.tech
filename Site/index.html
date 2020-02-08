@@ -31,23 +31,8 @@ table, th, td {
     <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Partners</a>
   </div>
 </div>
-
-<!-- Sidebar -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
-    <i class="fa fa-remove"></i>
-  </a>
-  <h4 class="w3-bar-item"><b>Menu</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-</nav>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
@@ -68,12 +53,12 @@ table, th, td {
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 2</td>
             <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 3</td>
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 4</td>
-            <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 5</td>
+            <!-- <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 5</td>
             <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 6</td>
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 7</td>
-            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 8</td>
+            <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 8</td> -->
           </tr>
-          <tr>
+          <!-- <tr>
             <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 9</td>
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 10</td>
             <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 11</td>
@@ -82,66 +67,19 @@ table, th, td {
             <td width="100px" height="200px" bgcolor="#FF0000" align="center">Spot 14</td>
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 15</td>
             <td width="100px" height="200px" bgcolor="#00FF00" align="center">Spot 16</td>
-          </tr>
+          </tr> -->
         </table>
     </div>
     <div class="w3-third w3-container">
-      <h1>Current weather in Kansas provided by AccuWeather</h1>
+      <h2 class="w3-text-teal">Current weather in Kansas provided by AccuWeather</h2>
       <!-- <p class="w3-border w3-padding-large w3-padding-32 w3-center"><a href="http://dataservice.accuweather.com/locations/v1/search?q=State%20College&apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV">Link</a></p> -->
       <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="demo">Something</p>
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="demo2">Something Else</p>
       <button onclick="currentConditions()">Update</button>
     </div>
   </div>
 
 <!-- END MAIN -->
 </div>
-
-<script>
-var jsonString = '[{"LocalObservationDateTime":"2020-02-08T11:57:00-06:00","EpochTime":1581184620,"WeatherText":"Sunny","WeatherIcon":1,"HasPrecipitation":false,"PrecipitationType":null,"IsDayTime":true,"Temperature":{"Metric":{"Value":9.5,"Unit":"C","UnitType":17},"Imperial":{"Value":49.0,"Unit":"F","UnitType":18}},"MobileLink":"http://m.accuweather.com/en/us/kansas-al/35549/current-weather/2231320?lang=en-us","Link":"http://www.accuweather.com/en/us/kansas-al/35549/current-weather/2231320?lang=en-us"}]';
-
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
-}
-
-// function currentConditions() {
-
-  // var json = new WebClient().DownloadString("http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV");
-
-  // var xmlhttp = new XMLHttpRequest();
-  // xmlhttp.onreadystatechange = function() {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     var myObj = JSON.parse(this.responseText);
-  //     document.getElementById("demo").innerHTML = myObj[0].LocalObservationDateTime;
-  //   }
-  // };
-  // xmlhttp.open("GET", jsonString, true);
-  // xmlhttp.send();
-
-  // "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV"
-
-// }
-
-</script>
 
 </body>
 </html>
