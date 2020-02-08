@@ -8,6 +8,10 @@
 #define AWS_IOT_PUBLISH_TOPIC   "esp32/pub"
 #define AWS_IOT_SUBSCRIBE_TOPIC "esp32/sub"
 
+int slot1 = 0;
+int slot2 = 0;
+int slot3 = 0;
+
 WiFiClientSecure net = WiFiClientSecure();
 MQTTClient client = MQTTClient(256);
 
@@ -55,8 +59,10 @@ void connectAWS()
 void publishMessage()
 {
   StaticJsonDocument<200> doc;
-  doc["time"] = millis();
-  doc["sensor_a0"] = analogRead(0);
+  doc["Time"] = millis();
+  doc["Slot1"] = digitalRead(5);
+  doc["Slot2"] = digitalRead(18);
+  doc["Slot3"] = digitalRead(23);
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer); // print to client
 
@@ -74,6 +80,9 @@ void messageHandler(String &topic, String &payload) {
 void setup() {
   Serial.begin(9600);
   connectAWS();
+  pinMode(5, input);
+  pinMode(18, input);
+  pinMode(23, input);
 }
 
 void loop() {

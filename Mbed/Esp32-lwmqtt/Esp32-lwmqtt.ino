@@ -14,16 +14,31 @@
  *****************************************************************************/
 #include "esp32-mqtt.h"
 #include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <ArduinoJson.h>
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
 #define LEDPIN 5;
 
-// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+
+//sensor defines
+#include <NewPing.h>
+#define RESULT       5
+#define TRIGGER_1    8
+#define ECHO_1       9
+#define TRIGGER_2    12
+#define ECHO_2       13
+#define MAX_DISTANCE 400
+#define TIMECHECK    5UL
+#define TIMELIMIT    60000UL
+NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
+float duration, distance;
+int iterations = 10;
+byte lastState, thisState;
+unsigned long startMillis, bigMillis;
+
 
 char buffer[100];
 bool spot1;
@@ -34,46 +49,60 @@ bool spot4;
 //get the parking lot state
 char checklot(){
   //Put morgans code here
-
-  //convert to json here
-    doc["Spot 1"] = spot1;
-    doc["Spot 2"] = spot2;
-    doc["Spot 3"] = spot3;
-    doc["Spot 4"] = spot4;
-    serializeJson(doc, buffer);
+    while(millis() - bigMillis <= TIMELIMIT)
+    {
+      duration = sonar.ping_median(iterations);
     
-   //display on the OLED
-    display.clearDisplay();
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-    display.setCursor(0, 10);
-    // Display static text
-    display.print("1: ");
-    display.println(spot1);
-    display.print("2: ");
-    display.println(spot2);
-    display.print("3: ");
-    display.println(spot3);
-    display.print("4: ");
-    display.println(spot4);
-    display.display(); 
-    delay(2000);
+      //Determine distance from duration
+      // Speed of sound = 343 m/s
+      
+      distance = (duration / 2) * 0.0343;
+      
+      //Send results to Serial Monitor
+      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
+      if (distance <= 75)
+      {
+        thisState = HIGH;
+      }
+      else
+      {
+        thisState = LOW;
+      }
+      
+      if (lastState != thisState)
+      {
+      //update to the new state
+      lastState = thisState;
+      //record time
+      startMillis = millis();
+      }
+      else
+      {
+        digitalWrite(RESULT, LOW);
+      }
+      
+      if ((lastState == HIGH) && (millis() - startMillis >= TIMECHECK))
+      {
+      digitalWrite(RESULT, HIGH);
+      }
+    }
+    
+    bigMillis = millis();
+
+
 }
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  pinMode(LEDDPIN, OUTPUT);
+  //pinMode(LEDDPIN, OUTPUT);
   setupCloudIoT();
 
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0, 10);
-  // Display static text
-  display.println("Parkinglot.tech");
-  display.display(); 
-  delay(2000);
+  pinMode(RESULT, OUTPUT);
+    
+  digitalWrite(RESULT, LOW);
+  thisState = LOW;
+  bigMillis = 0;
 }
 
 unsigned long lastMillis = 0;
@@ -91,6 +120,14 @@ void loop() {
     Serial.println("Publishing value");
     lastMillis = millis();
     checklot();
+      //convert to json here
+    StaticJsonDocument<100> doc;
+    doc["Spot 1"] = spot1;
+    doc["Spot 2"] = spot2;
+    doc["Spot 3"] = spot3;
+    doc["Spot 4"] = spot4;
+    serializeJson(doc, buffer);
+    
     
     //publishTelemetry(mqttClient, "/sensors", getDefaultSensor());
     publishTelemetry( buffer);
