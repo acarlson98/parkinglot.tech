@@ -20,52 +20,37 @@
 
 // NewPing - Version: Latest 
 #include <NewPing.h>
-
-#define RESULT1      15
-#define RESULT2      9
-#define RESULT3      8
-#define TRIGGER_1    2
-#define ECHO_1       3
-#define TRIGGER_2    4
-#define ECHO_2       5
-#define TRIGGER_3    6
-#define ECHO_3       7
+#define RESULT       5
+#define TRIGGER_1    8
+#define ECHO_1       9
+#define TRIGGER_2    12
+#define ECHO_2       13
 #define MAX_DISTANCE 400
-#define TIMECHECK    50000UL //30000UL
-#define TIMELIMIT    60000UL //60000UL
+#define TIMECHECK    5UL
+#define TIMELIMIT    60000UL
+
+NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 
 float duration, distance;
 int iterations = 10;
 
-byte lastState1, lastState2, lastState3, thisState1, thisState2, thisState3;
+byte lastState, thisState;
 unsigned long startMillis, bigMillis;
 
 
 void setup() {
   
-    pinMode(RESULT1, OUTPUT);
-    pinMode(RESULT2, OUTPUT);
-    pinMode(RESULT3, OUTPUT);
+    pinMode(RESULT, OUTPUT);
     
-    digitalWrite(RESULT1, LOW);
-    digitalWrite(RESULT2, LOW);
-    digitalWrite(RESULT3, LOW);
-    thisState1 = LOW;
-    thisState2 = LOW;
-    thisState3 = LOW;
-    lastState1 = LOW;
-    lastState2 = LOW;
-    lastState3 = LOW;
+    digitalWrite(RESULT, LOW);
+    thisState = LOW;
     bigMillis = 0;
 }
 
 void loop() {
     
-    ////////////////test sensor 1/////////////////
     while(millis() - bigMillis <= TIMELIMIT)
     {
-      NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
-      
       duration = sonar.ping_median(iterations);
     
       //Determine distance from duration
@@ -77,116 +62,31 @@ void loop() {
       Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
       if (distance <= 75)
       {
-        thisState1 = HIGH;
+        thisState = HIGH;
       }
       else
       {
-        thisState1 = LOW;
+        thisState = LOW;
       }
       
-      if (lastState1 != thisState1)
+      if (lastState != thisState)
       {
       //update to the new state
-      lastState1 = thisState1;
+      lastState = thisState;
       //record time
       startMillis = millis();
       }
       else
       {
-        digitalWrite(RESULT1, LOW);
+        digitalWrite(RESULT, LOW);
       }
       
-      if ((lastState1 == HIGH) && (millis() - startMillis >= TIMECHECK))
+      if ((lastState == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-      digitalWrite(RESULT1, HIGH);
+      digitalWrite(RESULT, HIGH);
       }
     }
     
     bigMillis = millis();
     
-    ////////////////test sensor 2/////////////////
-    while(millis() - bigMillis <= TIMELIMIT)
-    {
-      NewPing sonar(TRIGGER_2, ECHO_2, MAX_DISTANCE);
-      
-      duration = sonar.ping_median(iterations);
-    
-      //Determine distance from duration
-      // Speed of sound = 343 m/s
-      
-      distance = (duration / 2) * 0.0343;
-      
-      //Send results to Serial Monitor
-      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
-      if (distance <= 75)
-      {
-        thisState2 = HIGH;
-      }
-      else
-      {
-        thisState2 = LOW;
-      }
-      
-      if (lastState2 != thisState2)
-      {
-      //update to the new state
-      lastState2 = thisState2;
-      //record time
-      startMillis = millis();
-      }
-      else
-      {
-        digitalWrite(RESULT2, LOW);
-      }
-      
-      if ((lastState2 == HIGH) && (millis() - startMillis >= TIMECHECK))
-      {
-      digitalWrite(RESULT2, HIGH);
-      }
-    }
-    
-    bigMillis = millis();
-
-    ////////////////test sensor 3/////////////////
-    while(millis() - bigMillis <= TIMELIMIT)
-    {
-      NewPing sonar(TRIGGER_3, ECHO_3, MAX_DISTANCE);
-      
-      duration = sonar.ping_median(iterations);
-    
-      //Determine distance from duration
-      // Speed of sound = 343 m/s
-      
-      distance = (duration / 2) * 0.0343;
-      
-      //Send results to Serial Monitor
-      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
-      if (distance <= 75)
-      {
-        thisState3 = HIGH;
-      }
-      else
-      {
-        thisState3 = LOW;
-      }
-      
-      if (lastState3 != thisState3)
-      {
-      //update to the new state
-      lastState3 = thisState3;
-      //record time
-      startMillis = millis();
-      }
-      else
-      {
-        digitalWrite(RESULT3, LOW);
-      }
-      
-      if ((lastState3 == HIGH) && (millis() - startMillis >= TIMECHECK))
-      {
-      digitalWrite(RESULT3, HIGH);
-      }
-    }
-    
-    bigMillis = millis();
 }
