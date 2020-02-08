@@ -3,8 +3,8 @@
 #define SECRET
 #define THINGNAME "CarSensor1"
 
-const char WIFI_SSID[] = "PKIIEEEOmaha";
-const char WIFI_PASSWORD[] = "HerbertDetloff";
+const char WIFI_SSID[] = "Pixel_1357";
+const char WIFI_PASSWORD[] = "PKIrocks";
 const char AWS_IOT_ENDPOINT[] = "adh344qzl66zk-ats.iot.us-east-2.amazonaws.com";
 
 // Amazon Root CA 1
