@@ -44,7 +44,7 @@
         <button onclick="">1</button>
         <button onclick="">2</button>
         <button onclick="">3</button>
-        
+
         <p id="spotOne">stuff</p>
         <p id="spotTwo">stuff</p>
         <p id="spotThree">stuff</p>
@@ -54,6 +54,7 @@
       <div class="w3-border w3-padding-large w3-padding-32"> 
         <img class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
         <p class="w3-center" id="current">current</p>
+        <p class="w3-center" id="current_time">current_time</p>
       </div>
       
       <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="forecast">forecast</p>
@@ -78,6 +79,7 @@ function currentConditions(){
       document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
       + myJson[0].Temperature.Imperial.Value + " " 
       + myJson[0].Temperature.Imperial.Unit;
+      document.getElementById("current_time").innerHTML = myJson[0].LocalObservationDateTime;
 
       var icon = myJson[0].WeatherIcon;
       if(icon < 10){
