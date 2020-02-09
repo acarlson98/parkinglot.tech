@@ -1,35 +1,15 @@
-/*
-  WriteMultipleFields
-  
-  Description: Writes values to fields 1,2,3,4 and status in a single ThingSpeak update every 20 seconds.
-  
-  Hardware: ESP32 based boards
-  
-  !!! IMPORTANT - Modify the secrets.h file for this project with your network connection and ThingSpeak channel details. !!!
-  
-  Note:
-  - Requires installation of EPS32 core. See https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md for details. 
-  - Select the target hardware from the Tools->Board menu
-  - This example is written for a network using WPA encryption. For WEP or WPA, change the WiFi.begin() call accordingly.
-  
-  ThingSpeak ( https://www.thingspeak.com ) is an analytic IoT platform service that allows you to aggregate, visualize, and 
-  analyze live data streams in the cloud. Visit https://www.thingspeak.com to sign up for a free account and create a channel.  
-  
-  Documentation for the ThingSpeak Communication Library for Arduino is in the README.md folder where the library was installed.
-  See https://www.mathworks.com/help/thingspeak/index.html for the full ThingSpeak documentation.
-  
-  For licensing information, see the accompanying license file.
-  
-  Copyright 2018, The MathWorks, Inc.
-*/
+//Parkinglot.tech Thing Speak code
+//PKI-IEEE
+//Takumi Ito
+//2/9/2020
 
-#include "ThingSpeak.h"
+#include "ThingSpeak.h" //install library for thing speak
 #include "secrets.h"
 #include <WiFi.h>
 
-char ssid[] = "PKI";   // your network SSID (name) 
+char ssid[] = "PKI";        // your network SSID (name) 
 char pass[] = "12345678";   // your network password
-int keyIndex = 0;            // your network key Index number (needed only for WEP)
+int keyIndex = 0;           // your network key Index number (needed only for WEP)
 WiFiClient  client;
 
 unsigned long myChannelNumber = 985815;
@@ -96,5 +76,5 @@ void loop() {
     Serial.println("Problem updating channel. HTTP error code " + String(x));
   }
  
-  delay(5000); // Wait 20 seconds to update the channel again
+  delay(20000); // Wait 20 seconds to update the channel again
 }
