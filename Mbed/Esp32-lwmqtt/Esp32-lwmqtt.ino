@@ -59,7 +59,6 @@ char checklot(){
       distance = (duration / 2) * 0.0343;
       
       //Send results to Serial Monitor
-      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
       if (distance <= 75)
       {
         thisState = HIGH;
