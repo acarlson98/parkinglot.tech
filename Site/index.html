@@ -41,15 +41,12 @@
             <td id="three" align="center">Spot 3</td>
           </tr>
         </table>
-        <button onclick="">1</button>
-        <button onclick="">2</button>
-        <button onclick="">3</button>
 
-        <div>
+        <!-- <div>
           <p style="width:33.33%; float: left;" id="spotOne">stuff</p>
           <p style="width:33.33%; float: left;" id="spotTwo">stuff</p>
           <p style="width:33.33%; float: left;" id="spotThree">stuff</p>
-        </div>
+        </div> -->
 
         <button onclick="updateSpots()">Update Spots</button>
 
@@ -193,45 +190,12 @@ function updateSpots(){
       console.err("Invalid response from server.");
     }
 
-    document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
-    document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
-    document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
+    // document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
+    // document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
+    // document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
   });
-
-  // fetch(fieldURL)
-  // .then((response) => {
-  //     return response.json();
-  // })
-  // .then((myJson) => {
-  //   console.log("field");  
-  //   console.log(myJson);
-  // });
-
-  // fetch(statusURL)
-  // .then((response) => {
-  //     return response.json();
-  // })
-  // .then((myJson) => {
-  //   console.log("status");  
-  //   console.log(myJson);
-  // });
 }
 
-// function updateFull(){
-
-// }
-
-// function toggleOne(){
-//   if(getElementById(one).){
-// }
-
-// function toggleTwo(){
-
-// }
-
-// function toggleThree(){
-
-// }
 </script>
 </div>
 
