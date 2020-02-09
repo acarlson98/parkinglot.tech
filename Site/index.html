@@ -112,13 +112,16 @@
           })
           .then((myJson) => {
             console.log(myJson);
+
+            // setting current temp and time
             document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " +
               myJson[0].Temperature.Imperial.Value + " " +
               myJson[0].Temperature.Imperial.Unit;
               var received_time = myJson[0].LocalObservationDateTime;
-              received_time = received_time.substring(0,10) + " " + received_time.substring(11,19);
+              received_time = "As of " + received_time.substring(0,10) + " " + received_time.substring(11,19);
             document.getElementById("current_time").innerHTML = received_time;
 
+            // setting weather icon
             var icon = myJson[0].WeatherIcon;
             if (icon < 10) {
               var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
@@ -145,7 +148,16 @@
             for (i = 0; i < 6; i++) {
               document.getElementById("forecast" + (i + 1)).innerHTML = myJson[i].Temperature.Value + myJson[i].Temperature.Unit;
               const trimmed = myJson[i].DateTime;
-              document.getElementById("forecast" + (i + 1) + "_time").innerHTML = trimmed.substring(11, 17);
+              document.getElementById("forecast" + (i + 1) + "_time").innerHTML = trimmed.substring(11, 16);
+
+              var icon = myJson[i].WeatherIcon;
+              if (icon < 10) {
+                var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
+              } else {
+                var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
+              }
+              document.getElementById("forecast" + (i + 1) + "Image").src = newUrl;
+
             }
           });
       }
