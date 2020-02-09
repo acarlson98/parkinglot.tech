@@ -12,11 +12,12 @@
 
 <!-- update every 30 secs -->
 
-<body onload="currentConditions();forecast();updateSpots();window.setInterval(updateSpots, 30000)">
+<!-- <body onload="currentConditions();forecast();updateSpots();window.setInterval(updateSpots, 30000)"> -->
+  <!-- <body style="background-color: gray;"> -->
 
   <!-- Navbar -->
   <div class="w3-top">
-    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <div class="w3-bar w3-top w3-left-align w3-large" style="background-color:#7dadf1">
       <img style="height:30px" src="parking_lot_logo.png">
     </div>
   </div>
@@ -25,19 +26,19 @@
 
     <div class="w3-row w3-padding-64">
       <div class="w3-twothird w3-container">
-        <h1 style="color:#1B1464">Parking Space Checker</h1>
-        <p style="color:#1B1464">Below you can check parking space availability. Green means the space is currently
+        <h1>Parking Space Checker</h1>
+        <p>Below you can check parking space availability. Green means the space is currently
           vacant, while red means the space is currently in use.</p>
 
-        <p style="color:#1B1464" id="spots_left">There are __ spots left.</p>
+        <p id="spots_left">There are __ spots left.</p>
 
         <!-- Parking Spot Regions -->
         <table class="parking_graph">
           <tr>
             <!-- use bgcolor="#EA2027" for red, #009432 for green -->
-            <td id="one" align="center">Spot 1</td>
-            <td id="two" align="center">Spot 2</td>
-            <td id="three" align="center">Spot 3</td>
+            <td id="one" align="center"><!-- <img style="width:100px" src="EatThis.png"> -->Spot 1</td>
+            <td id="two" align="center"><!-- <img style="width:100px" src="EatThis.png"> -->Spot 2</td>
+            <td id="three" align="center"><!-- <img style="width:100px" src="EatThis.png"> -->Spot 3</td>
           </tr>
         </table>
 
@@ -180,33 +181,33 @@
 
             if (feedStream.field1 == 0) {
               // apply green color
-              document.getElementById("one").style.backgroundColor = "#009432";
+              document.getElementById("one").style.borderColor = "#009432";
               full++;
             } else if (feedStream.field1 == 1) {
               // apply red color
-              document.getElementById("one").style.backgroundColor = "#EA2027";
+              document.getElementById("one").style.borderColor = "#EA2027";
             } else {
               console.err("Invalid response from server.");
             }
 
             if (feedStream.field2 == 0) {
               // apply green color
-              document.getElementById("two").style.backgroundColor = "#009432";
+              document.getElementById("two").style.borderColor = "#009432";
               full++;
             } else if (feedStream.field2 == 1) {
               // apply red color
-              document.getElementById("two").style.backgroundColor = "#EA2027";
+              document.getElementById("two").style.borderColor = "#EA2027";
             } else {
               console.err("Invalid response from server.");
             }
 
             if (feedStream.field3 == 0) {
               // apply green color
-              document.getElementById("three").style.backgroundColor = "#009432";
+              document.getElementById("three").style.borderColor = "#009432";
               full++;
             } else if (feedStream.field3 == 1) {
               // apply red color
-              document.getElementById("three").style.backgroundColor = "#EA2027";
+              document.getElementById("three").style.borderColor = "#EA2027";
             } else {
               console.err("Invalid response from server.");
             }
