@@ -3,35 +3,18 @@
 
   Uses the HC-SR04 Ultrasonic Range Finder to measure distance 
   between the emitter and a solid object using the speed of sound.
-  TRIG is wrired to pin 10, and ECHO is wired to pin 13.
 
   The circuit:
   - UNO Arduino
   - HC-SR04 Ultrasonic Range Finder
-  - 10 Wires
+  ~ 10 Wires
 
   created 8 Feb 2020
   by Morgan Gallagher
-
-  This code is in the public domain.
-  
-  https://www.youtube.com/watch?v=6F1B_N6LuKw&t=123s
 */
 
 // NewPing - Version: Latest 
 #include <NewPing.h>
-<<<<<<< HEAD
-#define RESULT       5
-#define TRIGGER_1    8
-#define ECHO_1       9
-#define TRIGGER_2    12
-#define ECHO_2       13
-#define MAX_DISTANCE 400
-#define TIMECHECK    5UL
-#define TIMELIMIT    60000UL
-
-NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
-=======
 
 #define RESULT1      15
 #define ESP1         10
@@ -48,23 +31,16 @@ NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 #define MAX_DISTANCE 400
 #define TIMECHECK    5UL     //30000UL
 #define TIMELIMIT    5000UL //60000UL
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 
 float duration, distance;
 int iterations = 10;
 
-byte lastState, thisState;
+byte lastState1, lastState2, lastState3, thisState1, thisState2, thisState3;
 unsigned long startMillis, bigMillis;
 
 
 void setup() {
   
-<<<<<<< HEAD
-    pinMode(RESULT, OUTPUT);
-    
-    digitalWrite(RESULT, LOW);
-    thisState = LOW;
-=======
     pinMode(RESULT1, OUTPUT);
     pinMode(RESULT2, OUTPUT);
     pinMode(RESULT3, OUTPUT);
@@ -85,14 +61,11 @@ void setup() {
     lastState1 = LOW;
     lastState2 = LOW;
     lastState3 = LOW;
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
     bigMillis = 0;
 }
 
 void loop() {
     
-<<<<<<< HEAD
-=======
     ////////////////test sensor 1/////////////////
     while(millis() - bigMillis <= TIMELIMIT)
     {
@@ -139,9 +112,10 @@ void loop() {
     bigMillis = millis();
     
     ////////////////test sensor 2/////////////////
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
     while(millis() - bigMillis <= TIMELIMIT)
     {
+      NewPing sonar(TRIGGER_2, ECHO_2, MAX_DISTANCE);
+      
       duration = sonar.ping_median(iterations);
     
       //Determine distance from duration
@@ -153,45 +127,42 @@ void loop() {
       Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
       if (distance <= 75)
       {
-        thisState = HIGH;
+        thisState2 = HIGH;
       }
       else
       {
-        thisState = LOW;
+        thisState2 = LOW;
       }
       
-      if (lastState != thisState)
+      if (lastState2 != thisState2)
       {
       //update to the new state
-      lastState = thisState;
+      lastState2 = thisState2;
       //record time
       startMillis = millis();
       }
       else
       {
-<<<<<<< HEAD
-        digitalWrite(RESULT, LOW);
-=======
         digitalWrite(RESULT2, LOW);
         digitalWrite(ESP2, LOW);
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
       }
       
-      if ((lastState == HIGH) && (millis() - startMillis >= TIMECHECK))
+      if ((lastState2 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-<<<<<<< HEAD
-      digitalWrite(RESULT, HIGH);
-=======
         digitalWrite(RESULT2, HIGH);
         digitalWrite(ESP2, HIGH);
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
       }
     }
     
     bigMillis = millis();
+
+    ////////////////test sensor 3/////////////////
+    while(millis() - bigMillis <= TIMELIMIT)
+    {
+      NewPing sonar(TRIGGER_3, ECHO_3, MAX_DISTANCE);
+      
+      duration = sonar.ping_median(iterations);
     
-<<<<<<< HEAD
-=======
       //Determine distance from duration
       // Speed of sound = 343 m/s
       
@@ -229,5 +200,4 @@ void loop() {
     }
     
     bigMillis = millis();
->>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 }
