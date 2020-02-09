@@ -20,37 +20,62 @@
 
 // NewPing - Version: Latest 
 #include <NewPing.h>
-#define RESULT       5
-#define TRIGGER_1    8
-#define ECHO_1       9
-#define TRIGGER_2    12
-#define ECHO_2       13
-#define MAX_DISTANCE 400
-#define TIMECHECK    5UL
-#define TIMELIMIT    60000UL
 
-NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
+#define RESULT1      15
+#define ESP1         10
+#define RESULT2      9
+#define ESP2         16
+#define RESULT3      8
+#define ESP3         14
+#define TRIGGER_1    2
+#define ECHO_1       3
+#define TRIGGER_2    4
+#define ECHO_2       5
+#define TRIGGER_3    6
+#define ECHO_3       7
+#define MAX_DISTANCE 400
+#define TIMECHECK    5UL     //30000UL
+#define TIMELIMIT    5000UL  //60000UL
 
 float duration, distance;
 int iterations = 10;
 
-byte lastState, thisState;
+byte lastState1, lastState2, lastState3, thisState1, thisState2, thisState3;
 unsigned long startMillis, bigMillis;
 
 
 void setup() {
   
-    pinMode(RESULT, OUTPUT);
+    pinMode(RESULT1, OUTPUT);
+    pinMode(RESULT2, OUTPUT);
+    pinMode(RESULT3, OUTPUT);
+    pinMode(ESP1, OUTPUT);
+    pinMode(ESP2, OUTPUT);
+    pinMode(ESP3, OUTPUT);
     
-    digitalWrite(RESULT, LOW);
-    thisState = LOW;
+    digitalWrite(RESULT1, LOW);
+    digitalWrite(RESULT2, LOW);
+    digitalWrite(RESULT3, LOW);
+    digitalWrite(ESP1, LOW);
+    digitalWrite(ESP2, LOW);
+    digitalWrite(ESP3, LOW);
+    
+    thisState1 = LOW;
+    thisState2 = LOW;
+    thisState3 = LOW;
+    lastState1 = LOW;
+    lastState2 = LOW;
+    lastState3 = LOW;
     bigMillis = 0;
 }
 
 void loop() {
     
+    ////////////////test sensor 1/////////////////
     while(millis() - bigMillis <= TIMELIMIT)
     {
+      NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
+      
       duration = sonar.ping_median(iterations);
     
       //Determine distance from duration
@@ -62,31 +87,122 @@ void loop() {
       Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
       if (distance <= 75)
       {
-        thisState = HIGH;
+        thisState1 = HIGH;
       }
       else
       {
-        thisState = LOW;
+        thisState1 = LOW;
       }
       
-      if (lastState != thisState)
+      if (lastState1 != thisState1)
       {
       //update to the new state
-      lastState = thisState;
+      lastState1 = thisState1;
       //record time
       startMillis = millis();
       }
       else
       {
-        digitalWrite(RESULT, LOW);
+        digitalWrite(RESULT1, LOW);
+        digitalWrite(ESP1, LOW);
       }
       
-      if ((lastState == HIGH) && (millis() - startMillis >= TIMECHECK))
+      if ((lastState1 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
-      digitalWrite(RESULT, HIGH);
+        digitalWrite(RESULT1, HIGH);
+        digitalWrite(ESP1, HIGH);
       }
     }
     
     bigMillis = millis();
     
+    ////////////////test sensor 2/////////////////
+    while(millis() - bigMillis <= TIMELIMIT)
+    {
+      NewPing sonar(TRIGGER_2, ECHO_2, MAX_DISTANCE);
+      
+      duration = sonar.ping_median(iterations);
+    
+      //Determine distance from duration
+      // Speed of sound = 343 m/s
+      
+      distance = (duration / 2) * 0.0343;
+      
+      //Send results to Serial Monitor
+      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
+      if (distance <= 75)
+      {
+        thisState2 = HIGH;
+      }
+      else
+      {
+        thisState2 = LOW;
+      }
+      
+      if (lastState2 != thisState2)
+      {
+      //update to the new state
+      lastState2 = thisState2;
+      //record time
+      startMillis = millis();
+      }
+      else
+      {
+        digitalWrite(RESULT2, LOW);
+        digitalWrite(ESP2, LOW);
+      }
+      
+      if ((lastState2 == HIGH) && (millis() - startMillis >= TIMECHECK))
+      {
+        digitalWrite(RESULT2, HIGH);
+        digitalWrite(ESP2, HIGH);
+      }
+    }
+    
+    bigMillis = millis();
+
+    ////////////////test sensor 3/////////////////
+    while(millis() - bigMillis <= TIMELIMIT)
+    {
+      NewPing sonar(TRIGGER_3, ECHO_3, MAX_DISTANCE);
+      
+      duration = sonar.ping_median(iterations);
+    
+      //Determine distance from duration
+      // Speed of sound = 343 m/s
+      
+      distance = (duration / 2) * 0.0343;
+      
+      //Send results to Serial Monitor
+      Serial.print("Morgan Galagher. ECEN 1940  Distance = ");
+      if (distance <= 75)
+      {
+        thisState3 = HIGH;
+      }
+      else
+      {
+        thisState3 = LOW;
+      }
+      
+      if (lastState3 != thisState3)
+      {
+      //update to the new state
+      lastState3 = thisState3;
+      //record time
+      startMillis = millis();
+      }
+      else
+      {
+        digitalWrite(RESULT3, LOW);
+        digitalWrite(ESP3, LOW);
+      }
+      
+      if ((lastState3 == HIGH) && (millis() - startMillis >= TIMECHECK))
+      {
+        digitalWrite(RESULT3, HIGH);
+        digitalWrite(ESP3, HIGH);
+      }
+    }
+    
+    bigMillis = millis();
 }
