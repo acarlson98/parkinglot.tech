@@ -56,9 +56,39 @@
         <p class="w3-center" id="current">current</p>
         <p class="w3-center" id="current_time">current_time</p>
       </div>
-      
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="forecast">forecast</p>
-      <button onclick="currentConditions();forecast();image();">Update</button>
+
+      <div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast1Image">
+          <p class="w3-center" id="forecast1">forecast1</p>
+          <p class="w3-center" id="forecast1_time">forecast1_time</p>
+        </div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast2Image">
+          <p class="w3-center" id="forecast2">forecast2</p>
+          <p class="w3-center" id="forecast2_time">forecast2_time</p>
+        </div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast3Image">
+          <p class="w3-center" id="forecast3">forecast3</p>
+          <p class="w3-center" id="forecast3_time">forecast3_time</p>
+        </div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast4Image">
+          <p class="w3-center" id="forecast4">forecast4</p>
+          <p class="w3-center" id="forecast4_time">forecast4_time</p>
+        </div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast5Image">
+          <p class="w3-center" id="forecast5">forecast5</p>
+          <p class="w3-center" id="forecast5_time">forecast5_time</p>
+        </div>
+        <div class="w3-border" style="float:left; width:16.666%"> 
+          <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="forecast6Image">
+          <p class="w3-center" id="forecast6">forecast6</p>
+          <p class="w3-center" id="forecast6_time">forecast6_time</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -68,7 +98,7 @@
   var full = 2;
 function currentConditions(){
 
-  var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
+  var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
 
   fetch(URL)
   .then((response) => {
@@ -93,8 +123,7 @@ function currentConditions(){
 
 function forecast(){
 
-var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
-var temps = "";
+var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
 
 fetch(URL)
 .then((response) => {
@@ -103,10 +132,11 @@ fetch(URL)
 .then((myJson) => {
     console.log(myJson);
     var i;
-    for(i = 0; i < myJson.length; i++){
-       temps += myJson[i].Temperature.Value + " ";
+    for(i = 0; i < 6; i++){
+      document.getElementById("forecast" + (i+1)).innerHTML = myJson[i].Temperature.Value;
+      const trimmed = myJson[i].DateTime;
+      document.getElementById("forecast" + (i+1) + "_time").innerHTML = trimmed.substring(10,16);
     }
-    document.getElementById("forecast").innerHTML = temps;
 });
 }
 
@@ -130,11 +160,27 @@ function updateSpots(){
     document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
     document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
   });
+
+  fetch(fieldURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("field");  
+    console.log(myJson);
+  });
+
+  fetch(statusURL)
+  .then((response) => {
+      return response.json();
+  })
+  .then((myJson) => {
+    console.log("status");  
+    console.log(myJson);
+  });
 }
 
-// function updatePercent(){
-// // number full / total (3) * 100
-//   document.getElementById("percentage").innerHTML = "The parking lot is currently " + ((full/3)*100) + " % full.";
+// function updateFull(){
 // }
 
 // function toggleOne(){
