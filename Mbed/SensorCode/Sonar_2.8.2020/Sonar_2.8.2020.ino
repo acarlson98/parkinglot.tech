@@ -35,7 +35,7 @@
 #define ECHO_3       7
 #define MAX_DISTANCE 400
 #define TIMECHECK    5UL     //30000UL
-#define TIMELIMIT    5000UL  //60000UL
+#define TIMELIMIT    5000UL //60000UL
 
 float duration, distance;
 int iterations = 10;
