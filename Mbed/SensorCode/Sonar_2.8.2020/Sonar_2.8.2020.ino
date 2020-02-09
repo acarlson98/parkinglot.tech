@@ -52,11 +52,15 @@ NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 #define MAX_DISTANCE 400
 #define TIMECHECK    5UL     //30000UL
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMELIMIT    5000UL  //60000UL
 =======
 #define TIMELIMIT    5000UL //60000UL
 >>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+#define TIMELIMIT    5000UL //60000UL
+>>>>>>> Morgan
 
 float duration, distance;
 int iterations = 10;
