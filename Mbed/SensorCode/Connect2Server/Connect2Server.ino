@@ -72,9 +72,15 @@ void messageHandler(String &topic, String &payload) {
 void setup() {
   Serial.begin(9600);
   connectAWS();
+<<<<<<< HEAD
 //  pinMode(5, input);
 //  pinMode(18, input);
  // pinMode(23, input);
+=======
+  pinMode(5, INPUT);
+  pinMode(18, INPUT);
+  pinMode(23, INPUT);
+>>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 }
 
 void loop() {
