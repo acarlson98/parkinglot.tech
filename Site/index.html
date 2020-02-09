@@ -1,157 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <title>ParkingLot.Tech</title>
-<link rel="icon" 
-      type="image/png" 
-      href="parkinglot_art.jpg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="parkinglot_art.jpg">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="main.css">
 
-<body onload="currentConditions();forecast();updateSpots()">
+<!-- update every 30 secs -->
 
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" height="50px"></a>
-    <a href="large_example.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+<body onload="currentConditions();forecast();updateSpots();window.setInterval(updateSpots, 30000)">
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+      <img style="height:30px" src="parking_lot_logo.png">
+    </div>
   </div>
-</div>
 
-<div class="w3-main" style="margin-left: 30px; margin-right: 30px">
+  <div class="w3-main" style="margin-left: 30px; margin-right: 30px">
 
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 style="color:#1B1464">Parking Space Checker</h1>
-      <p style="color:#1B1464">Below you can check parking space availability. Green means the space is currently vacant, while red means the space is currently in use.</p>
+    <div class="w3-row w3-padding-64">
+      <div class="w3-twothird w3-container">
+        <h1 style="color:#1B1464">Parking Space Checker</h1>
+        <p style="color:#1B1464">Below you can check parking space availability. Green means the space is currently
+          vacant, while red means the space is currently in use.</p>
 
-      <p style="color:#1B1464" id="spots_left">There are __ spots left.</p>
+        <p style="color:#1B1464" id="spots_left">There are __ spots left.</p>
 
         <!-- Parking Spot Regions -->
         <table class="parking_graph">
           <tr>
-            <!-- use bgcolor="#EA2027" for red -->
-            <!-- #009432 for green -->
-            <td id="one" bgcolor="#EA2027" align="center">Spot 1</td>
-            <td id="two" bgcolor="#009432" align="center">Spot 2</td>
-            <td id="three" bgcolor="#EA2027" align="center">Spot 3</td>
+            <!-- use bgcolor="#EA2027" for red, #009432 for green -->
+            <td id="one" align="center">Spot 1</td>
+            <td id="two" align="center">Spot 2</td>
+            <td id="three" align="center">Spot 3</td>
           </tr>
         </table>
-        <button onclick="">1</button>
-        <button onclick="">2</button>
-        <button onclick="">3</button>
 
-        <p id="spotOne">stuff</p>
-        <p id="spotTwo">stuff</p>
-        <p id="spotThree">stuff</p>
-    </div>
-    <div class="w3-third w3-container">
-      <h2>Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
-      <div class="w3-border w3-padding-large w3-padding-32"> 
-        <img class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
-        <p class="w3-center" id="current">current</p>
-        <p class="w3-center" id="current_time">current_time</p>
+        <button onclick="updateSpots()">Refresh</button>
+
       </div>
-      
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center" id="forecast">forecast</p>
-      <button onclick="currentConditions();forecast();image();">Update</button>
+      <div class="w3-third w3-container">
+        <h3 class="w3-center">Kansas weather forecast provided by</h3>
+        <img class="center" src="Accuweather-logo.png">
+        <div class="w3-border w3-padding-large w3-padding-32">
+          <img class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
+          <p class="w3-center">Current Temperature</p>
+          <p class="w3-center" id="current">current</p>
+          <p class="w3-center" id="current_time">current_time</p>
+        </div>
+
+        <div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast1Image">
+            <p class="w3-center" id="forecast1">forecast1</p>
+            <p class="w3-center" id="forecast1_time">forecast1_time</p>
+          </div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast2Image">
+            <p class="w3-center" id="forecast2">forecast2</p>
+            <p class="w3-center" id="forecast2_time">forecast2_time</p>
+          </div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast3Image">
+            <p class="w3-center" id="forecast3">forecast3</p>
+            <p class="w3-center" id="forecast3_time">forecast3_time</p>
+          </div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast4Image">
+            <p class="w3-center" id="forecast4">forecast4</p>
+            <p class="w3-center" id="forecast4_time">forecast4_time</p>
+          </div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast5Image">
+            <p class="w3-center" id="forecast5">forecast5</p>
+            <p class="w3-center" id="forecast5_time">forecast5_time</p>
+          </div>
+          <div class="w3-border" style="float:left; width:16.666%">
+            <img style="width:40px" class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png"
+              id="forecast6Image">
+            <p class="w3-center" id="forecast6">forecast6</p>
+            <p class="w3-center" id="forecast6_time">forecast6_time</p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- END MAIN -->
+
+    <script>
+      var full = 0;
+
+      function currentConditions() {
+
+        //AccuWeather API
+        var URL =
+          "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
+
+        fetch(URL)
+          .then((response) => {
+            return response.json();
+          })
+          .then((myJson) => {
+            console.log(myJson);
+            document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " +
+              myJson[0].Temperature.Imperial.Value + " " +
+              myJson[0].Temperature.Imperial.Unit;
+              var received_time = myJson[0].LocalObservationDateTime;
+              received_time = received_time.substring(0,10) + " " + received_time.substring(11,19);
+            document.getElementById("current_time").innerHTML = received_time;
+
+            var icon = myJson[0].WeatherIcon;
+            if (icon < 10) {
+              var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
+            } else {
+              var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
+            }
+            document.getElementById("currentImage").src = newUrl;
+          });
+      }
+
+      function forecast() {
+
+        // AccuWeather API
+        var URL =
+          "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
+
+        fetch(URL)
+          .then((response) => {
+            return response.json();
+          })
+          .then((myJson) => {
+            console.log(myJson);
+            var i;
+            for (i = 0; i < 6; i++) {
+              document.getElementById("forecast" + (i + 1)).innerHTML = myJson[i].Temperature.Value + myJson[i].Temperature.Unit;
+              const trimmed = myJson[i].DateTime;
+              document.getElementById("forecast" + (i + 1) + "_time").innerHTML = trimmed.substring(11, 17);
+            }
+          });
+      }
+
+      function updateSpots() {
+        // reset spot counter before reading again
+        full = 0;
+        var feedURL = "https://api.thingspeak.com/channels/985815/feeds.json?results=2";
+
+        fetch(feedURL)
+          .then((response) => {
+            return response.json();
+          })
+          .then((myJson) => {
+            console.log("feed");
+            console.log(myJson);
+
+            var feedStream = myJson.feeds[0];
+
+            if (feedStream.field1 == 0) {
+              // apply green color
+              document.getElementById("one").style.backgroundColor = "#009432";
+              full++;
+            } else if (feedStream.field1 == 1) {
+              // apply red color
+              document.getElementById("one").style.backgroundColor = "#EA2027";
+              full--;
+            } else {
+              console.err("Invalid response from server.");
+            }
+
+            if (feedStream.field2 == 0) {
+              // apply green color
+              document.getElementById("two").style.backgroundColor = "#009432";
+              full++;
+            } else if (feedStream.field2 == 1) {
+              // apply red color
+              document.getElementById("two").style.backgroundColor = "#EA2027";
+              full--;
+            } else {
+              console.err("Invalid response from server.");
+            }
+
+            if (feedStream.field3 == 0) {
+              // apply green color
+              document.getElementById("three").style.backgroundColor = "#009432";
+              full++;
+            } else if (feedStream.field3 == 1) {
+              // apply red color
+              document.getElementById("three").style.backgroundColor = "#EA2027";
+              full--;
+            } else {
+              console.err("Invalid response from server.");
+            }
+
+            updateFull();
+          });
+      }
+
+      function updateFull() {
+        document.getElementById("spots_left").innerHTML = "There are " + full + " spots left.";
+      }
+    </script>
   </div>
 
-<!-- END MAIN -->
-
-<script>
-  var full = 2;
-function currentConditions(){
-
-  var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
-
-  fetch(URL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-      console.log(myJson);
-      document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
-      + myJson[0].Temperature.Imperial.Value + " " 
-      + myJson[0].Temperature.Imperial.Unit;
-      document.getElementById("current_time").innerHTML = myJson[0].LocalObservationDateTime;
-
-      var icon = myJson[0].WeatherIcon;
-      if(icon < 10){
-        var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
-      } else{
-        var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
-      }
-      document.getElementById("currentImage").src = newUrl;
-  });
-}
-
-function forecast(){
-
-var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=riUagffR7Gc4oIG8JYW6y0CDJXxINaCV";
-var temps = "";
-
-fetch(URL)
-.then((response) => {
-    return response.json();
-})
-.then((myJson) => {
-    console.log(myJson);
-    var i;
-    for(i = 0; i < myJson.length; i++){
-       temps += myJson[i].Temperature.Value + " ";
-    }
-    document.getElementById("forecast").innerHTML = temps;
-});
-}
-
-function updateSpots(){
-  //feeds
-  var feedURL="https://api.thingspeak.com/channels/985815/feeds.json?results=2";
-  //fields
-  var fieldURL="https://api.thingspeak.com/channels/985815/fields/1.json?results=2";
-  //status
-  var statusURL="https://api.thingspeak.com/channels/985815/status.json";
-
-  fetch(feedURL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-    console.log("feed");  
-    console.log(myJson);
-
-    document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
-    document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
-    document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
-  });
-}
-
-// function updatePercent(){
-// // number full / total (3) * 100
-//   document.getElementById("percentage").innerHTML = "The parking lot is currently " + ((full/3)*100) + " % full.";
-// }
-
-// function toggleOne(){
-//   if(getElementById(one)){
-
-//   }
-// }
-
-// function toggleTwo(){
-
-// }
-
-// function toggleThree(){
-
-// }
-</script>
-</div>
-
 </body>
+
 </html>
