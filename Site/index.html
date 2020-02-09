@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="main.css">
 
-<body onload="currentConditions();forecast();updateSpots()">
+<!-- <body onload="currentConditions();forecast();updateSpots()"> -->
+  <body onload="updateSpots()"></body>
 
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1"><img src="parkinglot_art.jpg" height="50px"></a>
-    <a href="large_example.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+    <img style="height:30px" src="parking_lot_logo.png">
   </div>
 </div>
 
@@ -36,23 +36,30 @@
           <tr>
             <!-- use bgcolor="#EA2027" for red -->
             <!-- #009432 for green -->
-            <td id="one" bgcolor="#EA2027" align="center">Spot 1</td>
-            <td id="two" bgcolor="#009432" align="center">Spot 2</td>
-            <td id="three" bgcolor="#EA2027" align="center">Spot 3</td>
+            <td id="one" align="center">Spot 1</td>
+            <td id="two" align="center">Spot 2</td>
+            <td id="three" align="center">Spot 3</td>
           </tr>
         </table>
         <button onclick="">1</button>
         <button onclick="">2</button>
         <button onclick="">3</button>
 
-        <p id="spotOne">stuff</p>
-        <p id="spotTwo">stuff</p>
-        <p id="spotThree">stuff</p>
+        <div>
+          <p style="width:33.33%; float: left;" id="spotOne">stuff</p>
+          <p style="width:33.33%; float: left;" id="spotTwo">stuff</p>
+          <p style="width:33.33%; float: left;" id="spotThree">stuff</p>
+        </div>
+
+        <button onclick="updateSpots()">Update Spots</button>
+
     </div>
     <div class="w3-third w3-container">
-      <h2>Current weather in Kansas, provided by <img src="Accuweather-logo.png"></h2>
+      <h3 class="w3-center">Kansas weather forecast provided by</h3>
+      <img class="center" src="Accuweather-logo.png">
       <div class="w3-border w3-padding-large w3-padding-32"> 
         <img class="center" src="https://developer.accuweather.com/sites/default/files/05-s.png" id="currentImage">
+        <p class="w3-center">Current Temperature</p>
         <p class="w3-center" id="current">current</p>
         <p class="w3-center" id="current_time">current_time</p>
       </div>
@@ -96,49 +103,49 @@
 
 <script>
   var full = 2;
-function currentConditions(){
+// function currentConditions(){
 
-  var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
+  // var URL = "http://dataservice.accuweather.com/currentconditions/v1/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
 
-  fetch(URL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-      console.log(myJson);
-      document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
-      + myJson[0].Temperature.Imperial.Value + " " 
-      + myJson[0].Temperature.Imperial.Unit;
-      document.getElementById("current_time").innerHTML = myJson[0].LocalObservationDateTime;
+//   fetch(URL)
+//   .then((response) => {
+//       return response.json();
+//   })
+//   .then((myJson) => {
+//       console.log(myJson);
+//       document.getElementById("current").innerHTML = myJson[0].WeatherText + ", " 
+//       + myJson[0].Temperature.Imperial.Value + " " 
+//       + myJson[0].Temperature.Imperial.Unit;
+//       document.getElementById("current_time").innerHTML = myJson[0].LocalObservationDateTime;
 
-      var icon = myJson[0].WeatherIcon;
-      if(icon < 10){
-        var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
-      } else{
-        var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
-      }
-      document.getElementById("currentImage").src = newUrl;
-  });
-}
+//       var icon = myJson[0].WeatherIcon;
+//       if(icon < 10){
+//         var newUrl = "https://developer.accuweather.com/sites/default/files/0" + icon + "-s.png";
+//       } else{
+//         var newUrl = "https://developer.accuweather.com/sites/default/files/" + icon + "-s.png";
+//       }
+//       document.getElementById("currentImage").src = newUrl;
+//   });
+// }
 
-function forecast(){
+// function forecast(){
 
-var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
+// var URL = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/2231320?apikey=DEnJXo87HAeW5RnoTX5uD9R4vYFAdTPU";
 
-fetch(URL)
-.then((response) => {
-    return response.json();
-})
-.then((myJson) => {
-    console.log(myJson);
-    var i;
-    for(i = 0; i < 6; i++){
-      document.getElementById("forecast" + (i+1)).innerHTML = myJson[i].Temperature.Value;
-      const trimmed = myJson[i].DateTime;
-      document.getElementById("forecast" + (i+1) + "_time").innerHTML = trimmed.substring(10,16);
-    }
-});
-}
+// fetch(URL)
+// .then((response) => {
+//     return response.json();
+// })
+// .then((myJson) => {
+//     console.log(myJson);
+//     var i;
+//     for(i = 0; i < 6; i++){
+//       document.getElementById("forecast" + (i+1)).innerHTML = myJson[i].Temperature.Value;
+//       const trimmed = myJson[i].DateTime;
+//       document.getElementById("forecast" + (i+1) + "_time").innerHTML = trimmed.substring(10,16);
+//     }
+// });
+// }
 
 function updateSpots(){
   //feeds
@@ -156,37 +163,66 @@ function updateSpots(){
     console.log("feed");  
     console.log(myJson);
 
+    if(myJson.feeds[0].field1 == 0){
+      // apply green color
+      document.getElementById("one").style.backgroundColor = "#009432";
+    } else if(myJson.feeds[0].field1 == 1){
+      // apply red color
+      document.getElementById("one").style.backgroundColor = "#EA2027";
+    } else {
+      console.err("Invalid response from server.");
+    }
+
+    if(myJson.feeds[0].field2 == 0){
+      // apply green color
+      document.getElementById("two").style.backgroundColor = "#009432";
+    } else if(myJson.feeds[0].field2 == 1){
+      // apply red color
+      document.getElementById("two").style.backgroundColor = "#EA2027";
+    } else {
+      console.err("Invalid response from server.");
+    }
+
+    if(myJson.feeds[0].field3 == 0){
+      // apply green color
+      document.getElementById("three").style.backgroundColor = "#009432";
+    } else if(myJson.feeds[0].field3 == 1){
+      // apply red color
+      document.getElementById("three").style.backgroundColor = "#EA2027";
+    } else {
+      console.err("Invalid response from server.");
+    }
+
     document.getElementById("spotOne").innerHTML = "Spot 1: " + myJson.feeds[0].field1;
     document.getElementById("spotTwo").innerHTML = "Spot 2: " + myJson.feeds[0].field2;
     document.getElementById("spotThree").innerHTML = "Spot 3: " + myJson.feeds[0].field3;
   });
 
-  fetch(fieldURL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-    console.log("field");  
-    console.log(myJson);
-  });
+  // fetch(fieldURL)
+  // .then((response) => {
+  //     return response.json();
+  // })
+  // .then((myJson) => {
+  //   console.log("field");  
+  //   console.log(myJson);
+  // });
 
-  fetch(statusURL)
-  .then((response) => {
-      return response.json();
-  })
-  .then((myJson) => {
-    console.log("status");  
-    console.log(myJson);
-  });
+  // fetch(statusURL)
+  // .then((response) => {
+  //     return response.json();
+  // })
+  // .then((myJson) => {
+  //   console.log("status");  
+  //   console.log(myJson);
+  // });
 }
 
 // function updateFull(){
+
 // }
 
 // function toggleOne(){
-//   if(getElementById(one)){
-
-//   }
+//   if(getElementById(one).){
 // }
 
 // function toggleTwo(){

@@ -2,15 +2,8 @@ html,body,h1,h2,h3,h4,h5,h6 {
     font-family: "Roboto", sans-serif;
     /* color:#006266; */
   }
-  .w3-sidebar {
-    z-index: 3;
-    width: 250px;
-    top: 43px;
-    bottom: 0;
-    height: inherit;
-  }
-  table, th, td {
-    border: 5px solid black;
+  td {
+    border: 3px solid black;
   }
   .center {
     display: block;
