@@ -21,6 +21,7 @@
 // NewPing - Version: Latest 
 #include <NewPing.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
@@ -37,6 +38,9 @@ NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 =======
 
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
 #define RESULT1      15
 #define ESP1         10
 #define RESULT2      9
@@ -53,6 +57,7 @@ NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 #define TIMECHECK    5UL     //30000UL
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMELIMIT    5000UL  //60000UL
 =======
 #define TIMELIMIT    5000UL //60000UL
@@ -61,6 +66,9 @@ NewPing sonar(TRIGGER_1, ECHO_1, MAX_DISTANCE);
 =======
 #define TIMELIMIT    5000UL //60000UL
 >>>>>>> Morgan
+=======
+#define TIMELIMIT    5000UL //60000UL
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
 
 float duration, distance;
 int iterations = 10;
@@ -72,6 +80,9 @@ unsigned long startMillis, bigMillis;
 void setup() {
   
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
     pinMode(RESULT1, OUTPUT);
     pinMode(RESULT2, OUTPUT);
     pinMode(RESULT3, OUTPUT);
@@ -85,6 +96,7 @@ void setup() {
     digitalWrite(ESP1, LOW);
     digitalWrite(ESP2, LOW);
     digitalWrite(ESP3, LOW);
+<<<<<<< HEAD
     
 =======
 <<<<<<< HEAD
@@ -108,6 +120,9 @@ void setup() {
     digitalWrite(ESP3, LOW);
     
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+    
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
     thisState1 = LOW;
     thisState2 = LOW;
     thisState3 = LOW;
@@ -115,19 +130,25 @@ void setup() {
     lastState2 = LOW;
     lastState3 = LOW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
     bigMillis = 0;
 }
 
 void loop() {
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     ////////////////test sensor 1/////////////////
 =======
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
     ////////////////test sensor 1/////////////////
     while(millis() - bigMillis <= TIMELIMIT)
     {
@@ -162,6 +183,7 @@ void loop() {
       {
         digitalWrite(RESULT1, LOW);
         digitalWrite(ESP1, LOW);
+<<<<<<< HEAD
       }
       
       if ((lastState1 == HIGH) && (millis() - startMillis >= TIMECHECK))
@@ -218,10 +240,13 @@ void loop() {
         digitalWrite(ESP2, LOW);
 >>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
       }
       
       if ((lastState1 == HIGH) && (millis() - startMillis >= TIMECHECK))
       {
+<<<<<<< HEAD
 <<<<<<< HEAD
         digitalWrite(RESULT1, HIGH);
         digitalWrite(ESP1, HIGH);
@@ -233,12 +258,19 @@ void loop() {
         digitalWrite(ESP2, HIGH);
 >>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+        digitalWrite(RESULT1, HIGH);
+        digitalWrite(ESP1, HIGH);
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
       }
     }
     
     bigMillis = millis();
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
     ////////////////test sensor 2/////////////////
     while(millis() - bigMillis <= TIMELIMIT)
     {
@@ -291,10 +323,13 @@ void loop() {
       
       duration = sonar.ping_median(iterations);
     
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
       //Determine distance from duration
       // Speed of sound = 343 m/s
       
@@ -333,7 +368,10 @@ void loop() {
     
     bigMillis = millis();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> a4dc5299cda255ebde9769f310b0efea5d8c6944
 >>>>>>> d2121c2c19ae8805bfdc6cb0cb066e0e54794cee
+=======
+>>>>>>> parent of d8dca64... Merge branch 'master' of https://github.com/acarlson98/parkinglot.tech
 }
