@@ -1,32 +1,57 @@
-html,body,h1,h2,h4,h5,h6,p2 {
-    /* font-family: "Roboto", sans-serif; */
-    font-family: "Gill Sans", sans-serif;
-    color:#7dadf1;
-  }
-  h3 {
-    /* font-family: "Roboto", sans-serif; */
-    font-family: "Gill Sans", sans-serif;
-    text-shadow: 1px 1px black;
-    color:#7dadf1;
-  }
-  p {
-    /* font-family: "Roboto", sans-serif; */
-    font-family: "Gill Sans", sans-serif;
-    text-shadow: 0.5px 0.5px black;
-    color:#7dadf1;
-  }
-  td {
-    border: 10px solid yellow;
-    background-color: gray;
-    width: 200px;
-  }
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
-  .parking_graph {
-    height: 300px;
-    color: white;
-  }
+html,
+body,
+h1,
+h2,
+h4,
+h5,
+h6,
+p2 {
+  font-family: "Gill Sans", sans-serif;
+  color: #7dadf1;
+  text-shadow: 1px 1px grey;
+}
+
+h3 {
+  font-family: "Gill Sans", sans-serif;
+  color: #7dadf1;
+  text-shadow: 1px 1px grey;
+}
+
+p {
+  font-family: "Gill Sans", sans-serif;
+  color: #7dadf1;
+  text-shadow: 0.5px 0.5px grey;
+}
+
+td {
+  border: 10px solid yellow;
+  background-color: gray;
+  width: 200px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.parking_graph {
+  height: 300px;
+  color: white;
+}
+
+.car {
+  display: none;
+  transform: rotate(90deg);
+  width: 100%;
+  height: auto;
+}
+
+div.weather p {
+  text-shadow: 0.5px 0.5px black;
+}
+
+div.weather h3 {
+  text-shadow: 1px 1px black;
+}
