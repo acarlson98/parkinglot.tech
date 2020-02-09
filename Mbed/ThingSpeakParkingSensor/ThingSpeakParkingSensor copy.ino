@@ -26,6 +26,7 @@
 #include "ThingSpeak.h"
 #include "secrets.h"
 #include <WiFi.h>
+//#include "image.h"
 
 char ssid[] = "PKI";   // your network SSID (name) 
 char pass[] = "12345678";   // your network password
@@ -46,6 +47,16 @@ int lot3port = 23;
 int lot1 = 0;
 int lot2 = 0;
 int lot3 = 0;
+//SSD1306
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
 
 
 void setup() {
@@ -57,6 +68,15 @@ void setup() {
   pinMode(lot1port, INPUT);
   pinMode(lot2port, INPUT);
   pinMode(lot3port, INPUT);
+  delay(2000); // Pause for 2 seconds
+ 
+  // Clear the buffer.
+  display.clearDisplay();
+  
+  // Draw bitmap on the screen
+ // display.drawBitmap(0, 0, logo, 128, 17, 1);
+  display.display();
+  
 }
 
 void loop() {
@@ -96,5 +116,5 @@ void loop() {
     Serial.println("Problem updating channel. HTTP error code " + String(x));
   }
  
-  delay(20000); // Wait 20 seconds to update the channel again
+  delay(15000); // Wait 20 seconds to update the channel again
 }
